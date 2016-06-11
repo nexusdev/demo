@@ -1,17 +1,60 @@
-import 'erc20/base.sol'; // https://github.com/nexusdev/erc20
+import 'erc20/erc20.sol';
 import 'component.sol';
+import 'controller.sol';
 
-contract DemoToken is ERC20Base
-                    , Component
-{
-    function DemoToken(uint initial_balance, ComponentManager manager)
-             ERC20Base(initial_balance)
+contract DemoTokenFrontend is Component, ERC20 {
+    DemoTokenController _controller;
+
+    function DemoTokenFrontend(ComponentManager manager)
              Component(manager)
     {
+        refreshEnvironment();
     }
-    function setBalance(address who, uint balance)
-        auth
+    function refreshEnvironment() {
+        var raw = _manager.getEnv("controller");
+        _controller = DemoTokenController(address(raw));
+    }
+    function setController( DemoTokenController controller )
+             auth()
     {
-        _balances[who] = balance;
+        _controller = controller;
     }
+    function getController() constant returns (DemoTokenController controller) {
+        return _controller;
+    }
+
+    // ERCEvents
+    function emitTransfer( address from, address to, uint amount )
+             auth()
+    {
+        Transfer( from, to, amount );
+    }
+    function emitApproval( address holder, address spender, uint amount )
+             auth()
+    {
+        Approval( holder, spender, amount );
+    }
+
+    // ERC20Stateless
+    function totalSupply() constant returns (uint supply) {
+        return _controller.totalSupply();
+    }
+    function balanceOf( address who ) constant returns (uint value) {
+        return _controller.balanceOf( who );
+    }
+    function allowance(address owner, address spender) constant returns (uint _allowance) {
+        return _controller.allowance( owner, spender );
+    }
+
+    // ERC20Stateful
+    function transfer( address to, uint value) returns (bool ok) {
+        return _controller.transfer( msg.sender, to, value );
+    }
+    function transferFrom( address from, address to, uint value) returns (bool ok) {
+        return _controller.transferFrom( msg.sender, from, to, value );
+    }
+    function approve(address spender, uint value) returns (bool ok) {
+        return _controller.approve( msg.sender, spender, value );
+    }
+
 }
