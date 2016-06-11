@@ -48,5 +48,4 @@ unlocked so that you are able to sign and publish transactions from it.
 
 Finally, you will need some ether in order to pay the gas cost of
 deploying contracts or publishing other transactions from your account.
-
 You can get free ether for Morden here: http://faucet.ma.cx:3000/
