@@ -37,7 +37,7 @@ environments and its ethereum-rpc and ipfs endpoints.
 
 ### Start up Ethereum
 
-In order to learn to interact with ethereum we recommend running the ethereums 
+In order to learn to interact with ethereum we recommend running the ethereums
 testnet "morden" chain. You will also need to create a new account and unlock it on start.
 You can get free ether for morden here: http://faucet.ma.cx:3000/
 ```
