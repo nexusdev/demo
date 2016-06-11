@@ -1,0 +1,8 @@
+name: demo
+version: 0.0.1
+tags: []
+layout:
+  sol_sources: contracts
+  build_dir: build
+ignore: []
+dependencies: {}
