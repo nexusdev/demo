@@ -1,0 +1,7 @@
+import manager
+import factory
+
+factory.updateDemoSystemWithWhitelist(manager)
+var whitelist = manager.getEnv("whitelist")
+
+export whitelist

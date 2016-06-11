@@ -1,0 +1,6 @@
+var factory = new DemoTokenFactory()
+var manager = factory.newDemoSystem()
+var token = manager.getEnv("frontend")
+
+export manager
+export token
