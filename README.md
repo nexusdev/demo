@@ -13,15 +13,15 @@ Now install Dapple using npm:
 
     $ npm install -g dapple
 
+In order to deploy your contracts to the Ethereum testnet or mainnet,
+you will need a running Ethereum RPC endpoint, such as provided by `geth`
+([instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)).
+
 Although this is sufficient to start developing smart contracts, we highly
 recommend that you install the native Solidity compiler as well
 ([instructions](https://solidity.readthedocs.org/en/latest/installing-solidity.html)).
 While not strictly necessary, the Solidity compiler written in JavaScript
 which is bundled with Dapple is very slow and may have other problems.
-
-In order to deploy your contracts to the Ethereum testnet or mainnet,
-you will need a running Ethereum RPC endpoint, such as provided by `geth`
-([instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)).
 
 If you want to use some of the more advanced features of Dapple, you will
 also need to install IPFS ([instructions](https://ipfs.io/docs/install/)).
