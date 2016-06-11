@@ -1,26 +1,16 @@
 import 'erc20/base.sol'; // https://github.com/nexusdev/erc20
+import 'component.sol';
 
 contract DemoToken is ERC20Base
+                    , Component
 {
-    address _admin;
-    function DemoToken(uint initial_balance)
+    function DemoToken(uint initial_balance, ComponentManager manager)
              ERC20Base(initial_balance)
+             Component(manager)
     {
-        _admin = msg.sender;
-    }
-    modifier admin_only() {
-        if( msg.sender != _admin ) {
-            throw;
-        }
-        _
-    }
-    function updateAdmin(address new_admin)
-        admin_only
-    {
-        _admin = new_admin;
     }
     function setBalance(address who, uint balance)
-        admin_only
+        auth
     {
         _balances[who] = balance;
     }
