@@ -3,31 +3,21 @@ import 'erc20/erc20.sol';
 import 'token.sol';
 import 'datastore.sol';
 import 'controller.sol';
+import 'installer.sol';
 
 contract DemoTest is Test {
+    DemoTokenFactory factory;
     DemoTokenFrontend token;
     DemoTokenController controller;
     DemoTokenDB db;
     Tester t;
     ComponentManager manager;
     function setUp() {
-        manager = new ComponentManager();
-
-        token = new DemoTokenFrontend(manager);
-        controller = new DemoTokenController(manager);
-        db = new DemoTokenDB(manager);
-
-        manager.setRoot(token, true);
-        manager.setRoot(controller, true);
-        manager.setRoot(db, true);
-
-        manager.setEnv("frontend", bytes32(address(token)));
-        manager.setEnv("controller", bytes32(address(controller)));
-        manager.setEnv("db", bytes32(address(db)));
-
-        token.refreshEnvironment();
-        controller.refreshEnvironment();
-
+        factory = new DemoTokenFactory();
+        manager = factory.newDemoSystem();
+        token = DemoTokenFrontend(address(manager.getEnv("frontend")));
+        controller = DemoTokenController(address(manager.getEnv("controller")));
+        db = DemoTokenDB(address(manager.getEnv("db")));
         t = new Tester();
         t._target(token);
     }
