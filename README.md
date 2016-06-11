@@ -1,46 +1,52 @@
-This tutorial will guide you through a demo token system. For this we will use
-[dapple](http://dapple.readthedocs.io/en/latest/).
+This tutorial will guide you through a demo token system.
+We will use [Dapple](http://dapple.readthedocs.io/en/latest/)
+to build, test and deploy our contracts.
 
-## Install
+## Installing Dapple and the Solidity compiler
 
-Make sure you have node v5+ installed:
-```
-$ node --version
-v5.0.0
-```
+First of all, make sure you have Node.js version 5.0 or later:
 
-The normal way to install Dapple is through npm:
+    $ node --version
+    v6.0.0
 
-```
-$ npm install -g dapple
-```
+Now install Dapple using npm:
+
+    $ npm install -g dapple
 
 Although this is sufficient to start developing smart contracts, we highly
-recommend you to install native **solidity** compiler. You can do so by
-following the instructions [here](https://solidity.readthedocs.org/en/latest/installing-solidity.html).
-However, this is not necessary as a (slow) javascript compiler is provided along the installation.
+recommend that you install the native Solidity compiler as well
+([instructions](https://solidity.readthedocs.org/en/latest/installing-solidity.html)).
+While not strictly necessary, the Solidity compiler written in JavaScript
+which is bundled with Dapple is very slow and may have other problems.
 
-If you want to deploy your contracts to the ethereum testnet or mainnet, you
-will need a running rpc endpoint. We recommend go-ethereum for this. Following
-[this guide](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)
-will help you set it up.
+In order to deploy your contracts to the Ethereum testnet or mainnet,
+you will need a running Ethereum RPC endpoint, such as provided by `geth`
+([instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum)).
 
-If you want to use dapples advanced features, you also will need installing
-[ipfs](https://ipfs.io/docs/install/) for this.
+If you want to use some of the more advanced features of Dapple, you will
+also need to install IPFS ([instructions](https://ipfs.io/docs/install/)).
 
-## Configure dapple
+## Configuring Dapple
 
-After installing everything its time to configure dapple.
-Just run `dapple config` which will guide you through the set-up process and
-create a `~/.dapplerc` file in your home-directory containing information about
-environments and its ethereum-rpc and ipfs endpoints.
+After you've installed everything, it's time to configure Dapple.
+Running `dapple config` will guide you through the setup process and
+create a `~/.dapplerc` file in your home directory.  This file contains
+information about how to connect to the Ethereum RPC and IPFS endpoints.
 
-### Start up Ethereum
+## Starting your Ethereum node
 
-In order to learn to interact with ethereum we recommend running the ethereums
-testnet "morden" chain. You will also need to create a new account and unlock it on start.
-You can get free ether for morden here: http://faucet.ma.cx:3000/
-```
-$ geth --testnet account new        # create a new account
-$ geth --testnet --rpc --verbosity "2" --networkid 2 --unlock 0      # run the rpc client on localhost:8545
-```
+When experimenting with deploying contracts, you will want to use the
+non-production network meant for testing (known as "Morden"), which is
+done by giving the `--testnet` option to `geth`:
+
+    $ geth --testnet account new
+    $ geth --testnet --rpc --unlock 0
+
+The second command starts an Ethereum node for Morden with an RPC server
+listening on `localhost:8545` (the default port), and the first account
+unlocked so that you are able to sign and publish transactions from it.
+
+Finally, you will need some ether in order to pay the gas cost of
+deploying contracts or publishing other transactions from your account.
+
+You can get free ether for Morden here: http://faucet.ma.cx:3000/
