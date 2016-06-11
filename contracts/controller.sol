@@ -13,7 +13,6 @@ contract DemoTokenController is Component
     function DemoTokenController( ComponentManager manager )
              Component(manager)
     {
-        refreshEnvironment();
     }
     function refreshEnvironment() {
         _frontend = DemoTokenFrontend(address(_manager.getEnv("frontend")));

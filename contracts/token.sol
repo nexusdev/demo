@@ -8,21 +8,11 @@ contract DemoTokenFrontend is Component, ERC20 {
     function DemoTokenFrontend(ComponentManager manager)
              Component(manager)
     {
-        refreshEnvironment();
     }
     function refreshEnvironment() {
         var raw = _manager.getEnv("controller");
         _controller = DemoTokenController(address(raw));
     }
-    function setController( DemoTokenController controller )
-             auth()
-    {
-        _controller = controller;
-    }
-    function getController() constant returns (DemoTokenController controller) {
-        return _controller;
-    }
-
     // ERCEvents
     function emitTransfer( address from, address to, uint amount )
              auth()
